@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Cari makanan dan minuman kaki lima Jakarta yang sesuai dengan budget kamu.">
   <title>Rekomendasi Kuliner Jakarta</title>
-
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -56,18 +55,7 @@
           </div>
           <div class="field">
             <label for="lokasi-budget">Kamu lagi di mana?</label>
-            <select class="panel-select" id="lokasi-budget" name="lokasi">
-              <option value="semua">Semua Jakarta</option>
-              <optgroup label="Wilayah Administratif">
-                <option>Jakarta Pusat</option><option>Jakarta Utara</option><option>Jakarta Barat</option>
-                <option>Jakarta Timur</option><option>Jakarta Selatan</option><option>Kepulauan Seribu</option>
-              </optgroup>
-              <optgroup label="Kawasan Populer">
-                <option>Blok M</option><option>Kota Tua</option><option>Menteng</option><option>Tebet</option>
-                <option>Kelapa Gading</option><option>Jatinegara</option><option>Kemang</option><option>Pasar Santa</option>
-                <option>Tanah Abang</option><option>Glodok</option>
-              </optgroup>
-            </select>
+            <select class="panel-select" id="lokasi-budget" name="lokasi"></select>
           </div>
           <button class="primary-button" type="submit">Lihat pilihan</button>
         </form>
@@ -125,15 +113,7 @@
         </div>
         <div class="field">
           <label for="filter-wilayah">Wilayah / tempat</label>
-          <select id="filter-wilayah">
-            <option value="semua">Semua wilayah</option>
-            <optgroup label="Wilayah Administratif">
-              <option>Jakarta Pusat</option><option>Jakarta Utara</option><option>Jakarta Barat</option><option>Jakarta Timur</option><option>Jakarta Selatan</option><option>Kepulauan Seribu</option>
-            </optgroup>
-            <optgroup label="Kawasan Populer">
-              <option>Blok M</option><option>Kota Tua</option><option>Menteng</option><option>Tebet</option><option>Kelapa Gading</option><option>Jatinegara</option><option>Kemang</option><option>Pasar Santa</option><option>Tanah Abang</option><option>Glodok</option>
-            </optgroup>
-          </select>
+          <select id="filter-wilayah"></select>
         </div>
       </div>
       <p class="result-info" id="kategori-info"></p>
@@ -203,7 +183,6 @@
       <p>© 2026 Senshiner — Sendi Winoto<br><span class="footer-brand">Budget Picker JKT™</span></p>
     </div>
   </footer>
-
   <script src="script.js"></script>
 </body>
 </html>
