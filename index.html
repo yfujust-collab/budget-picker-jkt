@@ -3,66 +3,205 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Budget Picker JKT — cari makanan & minuman di Jakarta sesuai budget kamu.">
-  <title>Budget Picker JKT — Cari Makan Sesuai Budget</title>
+  <meta name="description" content="Cari makanan dan minuman kaki lima Jakarta yang sesuai dengan budget kamu.">
+  <title>Rekomendasi Kuliner Jakarta</title>
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <header>
-    <h1>🍜 Budget Picker JKT</h1>
-    <p>Dompet tipis bukan alasan buat nggak makan enak di Jakarta.</p>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-brand" href="#beranda">Budget Picker JKT</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
+        <span>Menu</span><span class="menu-lines" aria-hidden="true"></span>
+      </button>
+      <nav class="main-nav" id="main-nav" aria-label="Navigasi utama">
+        <ul class="nav-list">
+          <li><a class="nav-link" href="#beranda" data-page="beranda">Beranda</a></li>
+          <li><a class="nav-link" href="#jelajah" data-page="jelajah">Jelajah</a></li>
+          <li><a class="nav-link" href="#detail" data-page="detail">Detail</a></li>
+          <li><a class="nav-link" href="#kategori" data-page="kategori">Kategori</a></li>
+          <li><a class="nav-link" href="#dukungan" data-page="dukungan">Dukungan</a></li>
+          <li><a class="nav-link" href="#tentang" data-page="tentang">Tentang</a></li>
+          <li><a class="nav-link" href="#kontak" data-page="kontak">Kontak</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <!-- Form input budget -->
-    <section id="budget-form">
-      <h2>Masukkan Budget Kamu</h2>
-      <form id="form-budget">
-        <label for="input-budget">Budget (Rp)</label>
-        <input
-          type="number"
-          id="input-budget"
-          name="budget"
-          placeholder="Contoh: 25000"
-          min="0"
-          step="1000"
-          required
-        >
-
-        <fieldset>
-          <legend>Kategori</legend>
-          <label><input type="radio" name="kategori" value="semua" checked> Semua</label>
-          <label><input type="radio" name="kategori" value="makanan"> Makanan</label>
-          <label><input type="radio" name="kategori" value="minuman"> Minuman</label>
-        </fieldset>
-
-        <button type="submit">Cari Makanan</button>
-      </form>
+    <section class="page active" id="beranda" aria-labelledby="beranda-title">
+      <div class="hero">
+        <div class="hero-copy">
+          <h1 class="hero-title" id="beranda-title">Makan enak, tetap masuk anggaran.</h1>
+          <p class="lede">Cari makanan dan minuman di Jakarta yang sesuai budget dan lokasi kamu.</p>
+          <p class="hero-note">Pilihan lokal, diurutkan dari yang paling murah</p>
+        </div>
+        <form class="budget-panel" id="form-budget">
+          <h2>Cari yang sesuai budget</h2>
+          <div class="field">
+            <label for="input-budget">Budget kamu</label>
+            <div class="money-input">
+              <span>Rp</span>
+              <input type="number" id="input-budget" name="budget" placeholder="25.000" min="1000" step="1000" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="kategori-budget">Mau cari apa?</label>
+            <select class="panel-select" id="kategori-budget" name="kategori">
+              <option value="semua">Makanan & minuman</option>
+              <option value="makanan">Makanan saja</option>
+              <option value="minuman">Minuman saja</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="lokasi-budget">Kamu lagi di mana?</label>
+            <select class="panel-select" id="lokasi-budget" name="lokasi">
+              <option value="semua">Semua Jakarta</option>
+              <optgroup label="Wilayah Administratif">
+                <option>Jakarta Pusat</option><option>Jakarta Utara</option><option>Jakarta Barat</option>
+                <option>Jakarta Timur</option><option>Jakarta Selatan</option><option>Kepulauan Seribu</option>
+              </optgroup>
+              <optgroup label="Kawasan Populer">
+                <option>Blok M</option><option>Kota Tua</option><option>Menteng</option><option>Tebet</option>
+                <option>Kelapa Gading</option><option>Jatinegara</option><option>Kemang</option><option>Pasar Santa</option>
+                <option>Tanah Abang</option><option>Glodok</option>
+              </optgroup>
+            </select>
+          </div>
+          <button class="primary-button" type="submit">Lihat pilihan</button>
+        </form>
+      </div>
+      <div class="results-block" id="hasil-beranda">
+        <div class="section-bar">
+          <h2>Hasil pencarian</h2>
+          <p class="result-info" id="hasil-info">Belum ada pencarian</p>
+        </div>
+        <p class="empty-state" id="hasil-empty">Isi budget dulu, lalu pilih kategori yang kamu mau.</p>
+        <ul class="food-list" id="daftar-hasil"></ul>
+      </div>
     </section>
 
-    <!-- Hasil pencarian -->
-    <section id="hasil">
-      <h2>Hasil Pencarian</h2>
-      <p id="hasil-info">Masukkan budget di atas, hasilnya akan tampil di sini.</p>
-      <ul id="daftar-hasil"></ul>
+    <section class="page" id="jelajah" aria-labelledby="jelajah-title">
+      <div class="page-head">
+        <div class="hero-copy">
+          <h2 class="page-title" id="jelajah-title">Jelajah kuliner Jakarta.</h2>
+          <p class="lede">Dari sarapan hangat sampai es yang segar, semuanya bisa kamu telusuri di sini.</p>
+        </div>
+      </div>
+      <div class="browse-tools">
+        <input type="search" id="jelajah-search" placeholder="Cari nama kuliner…" aria-label="Cari nama kuliner">
+        <div class="filter-group" aria-label="Filter kategori">
+          <button class="filter-button active" type="button" data-filter="semua">Semua</button>
+          <button class="filter-button" type="button" data-filter="makanan">Makanan</button>
+          <button class="filter-button" type="button" data-filter="minuman">Minuman</button>
+        </div>
+      </div>
+      <p class="result-info" id="jelajah-info"></p>
+      <ul class="food-list" id="jelajah-list"></ul>
     </section>
 
-    <!-- Penjelasan singkat cara kerja -->
-    <section id="cara-kerja">
-      <h2>Cara Kerja</h2>
-      <ol>
-        <li>Masukkan budget yang kamu punya.</li>
-        <li>Pilih kategori: semua, makanan, atau minuman.</li>
-        <li>Klik "Cari Makanan".</li>
-        <li>Daftar kuliner Jakarta yang harganya masuk budget akan ditampilkan, urut dari yang termurah.</li>
-      </ol>
+    <section class="page" id="detail" aria-labelledby="detail-title">
+      <div class="page-head">
+        <div class="hero-copy">
+          <h2 class="page-title" id="detail-title">Kenalan sama menunya.</h2>
+          <p class="lede">Klik tiap item untuk membaca ciri khas, harga, kategori, dan area tempat menu itu biasa ditemukan.</p>
+        </div>
+      </div>
+      <div class="detail-list" id="detail-list"></div>
+    </section>
+
+    <section class="page" id="kategori" aria-labelledby="kategori-title">
+      <div class="page-head">
+        <div class="hero-copy">
+          <h2 class="page-title" id="kategori-title">Pilih jenis dan wilayah.</h2>
+          <p class="lede">Gunakan salah satu filter atau gabungkan keduanya untuk mempersempit pilihan.</p>
+        </div>
+      </div>
+      <div class="category-filter-panel">
+        <div class="field">
+          <label for="filter-jenis">Jenis</label>
+          <select id="filter-jenis"><option value="semua">Semua jenis</option><option value="makanan">Makanan</option><option value="minuman">Minuman</option></select>
+        </div>
+        <div class="field">
+          <label for="filter-wilayah">Wilayah / tempat</label>
+          <select id="filter-wilayah">
+            <option value="semua">Semua wilayah</option>
+            <optgroup label="Wilayah Administratif">
+              <option>Jakarta Pusat</option><option>Jakarta Utara</option><option>Jakarta Barat</option><option>Jakarta Timur</option><option>Jakarta Selatan</option><option>Kepulauan Seribu</option>
+            </optgroup>
+            <optgroup label="Kawasan Populer">
+              <option>Blok M</option><option>Kota Tua</option><option>Menteng</option><option>Tebet</option><option>Kelapa Gading</option><option>Jatinegara</option><option>Kemang</option><option>Pasar Santa</option><option>Tanah Abang</option><option>Glodok</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+      <p class="result-info" id="kategori-info"></p>
+      <ul class="food-list" id="kategori-list"></ul>
+    </section>
+
+    <section class="page" id="dukungan" aria-labelledby="dukungan-title">
+      <div class="page-head">
+        <div class="hero-copy">
+          <h2 class="page-title" id="dukungan-title">Mau traktir kopi?</h2>
+          <p class="lede">Aplikasi ini gratis dan dibuat iseng-iseng. Kalau terbantu dan mau traktir kopi, link-nya ada di bawah. Nggak maksa, santai aja.</p>
+        </div>
+      </div>
+      <div class="story-grid">
+        <div class="story-copy">
+          <p>Bisa pilih yang paling gampang buat kamu:</p>
+          <div class="filter-group">
+            <a class="primary-button" href="https://saweria.co/senshine" target="_blank" rel="noopener noreferrer">Saweria</a>
+            <a class="secondary-button" href="https://trakteer.id/senhshine" target="_blank" rel="noopener noreferrer">Trakteer</a>
+          </div>
+        </div>
+        <aside class="side-note">
+          <h2>Santai aja</h2>
+          <p>Nggak harus kok. Dipakai aja kalau memang membantu.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="page" id="tentang" aria-labelledby="tentang-title">
+      <div class="page-head">
+        <div class="hero-copy">
+          <h2 class="page-title" id="tentang-title">Biar pilih makan nggak kelamaan.</h2>
+          <p class="lede">Cari makanan dan minuman di Jakarta berdasarkan budget dan lokasi. Cocok juga buat cowo bingung yang sering mentok saat ditanya mau makan apa.</p>
+        </div>
+      </div>
+      <div class="story-grid">
+        <div class="story-copy">
+          <p>Caranya simpel: masukkan budget, pilih lokasi kamu saat ini, lalu lihat rekomendasi yang paling masuk akal. Kamu juga bisa menjelajahi daftar kuliner, membuka detail menu, serta menyaring pilihan berdasarkan jenis dan wilayah.</p>
+          <p>Informasi harga dan tempat dipakai sebagai perkiraan awal sebelum berangkat. Harga di lapangan bisa berubah, jadi sebaiknya cek lagi kalau kamu datang dari jauh.</p>
+        </div>
+        <aside class="side-note"><h2>Tujuannya</h2><p>Biar keputusan makan lebih cepat, pilihannya sesuai isi dompet, dan kamu nggak perlu muter Jakarta cuma buat cari menu yang cocok.</p></aside>
+      </div>
+    </section>
+
+    <section class="page" id="kontak" aria-labelledby="kontak-title">
+      <div class="page-head">
+        <div class="hero-copy">
+          <h2 class="page-title" id="kontak-title">Punya masukan?</h2>
+          <p class="lede">Kalau ada harga yang perlu diperbarui atau kuliner Jakarta yang layak masuk daftar, hubungi Senshiner.</p>
+        </div>
+      </div>
+      <div class="contact-grid">
+        <div>
+          <p class="muted">Kunjungi situs untuk melihat karya lain dan jalur kontak yang tersedia.</p>
+          <a class="contact-link" href="https://senshiner.is-a.dev" target="_blank" rel="noopener noreferrer">senshiner.is-a.dev</a>
+        </div>
+        <aside class="side-note">
+          <h2>Catatan harga</h2>
+          <p>Perkiraan harga mengacu pada kisaran kaki lima dan warkop Jakarta. Harga aktual bisa berubah.</p>
+        </aside>
+      </div>
     </section>
   </main>
 
   <footer>
-    <p>Budget Picker JKT — Tugas Akhir Pemrograman.</p>
-    <p>Harga bersifat perkiraan (kaki lima / warkop Jakarta).</p>
+    <div class="footer-inner">
+      <p>© 2026 Senshiner — Sendi Winoto<br><span class="footer-brand">Budget Picker JKT™</span></p>
+    </div>
   </footer>
 
   <script src="data.js"></script>
