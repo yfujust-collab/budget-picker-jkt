@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Budget Picker JKT — cari makanan & minuman di Jakarta sesuai budget kamu.">
-  <title>Budget Picker JKT — Cari Makan Sesuai Budget</title>
+  <meta name="description" content="Budget Picker JKT \u2014 cari makanan & minuman di Jakarta sesuai budget kamu.">
+  <title>Budget Picker JKT \u2014 Cari Makan Sesuai Budget</title>
   <link rel="stylesheet" href="style.css">
   <!-- Tahap 2: tambah styling CSS. Logika (JS) menyusul di tahap berikutnya. -->
 </head>
@@ -15,49 +15,46 @@
     <p>Dompet tipis bukan alasan buat nggak makan enak di Jakarta.</p>
   </header>
 
+  <hr>
+
   <main>
-    <!-- Form input budget -->
     <section id="budget-form">
       <h2>Masukkan Budget Kamu</h2>
       <form id="form-budget" action="#" method="get">
-        <label for="input-budget">Budget (Rp)</label>
-        <input
-          type="number"
-          id="input-budget"
-          name="budget"
-          placeholder="Contoh: 25000"
-          min="0"
-          step="1000"
-          required
-        >
-        <button type="submit">Cari Makanan</button>
+        <p>
+          <label for="input-budget">Budget (Rp)</label><br>
+          <input type="number" id="input-budget" name="budget" placeholder="Contoh: 25000" min="0" step="1000" required>
+        </p>
+        <p>
+          <button type="submit">Cari Makanan</button>
+        </p>
       </form>
-      <!-- Tombol submit belum berfungsi — logika pencarian ditambahkan di tahap JavaScript. -->
+      <!-- Catatan: tombol submit belum berfungsi, logika pencarian ditambahkan di tahap JavaScript. -->
     </section>
 
-    <!-- Hasil pencarian, diisi oleh JavaScript di tahap berikutnya -->
+    <hr>
+
     <section id="hasil">
       <h2>Hasil Pencarian</h2>
       <p id="hasil-kosong">Masukkan budget di atas, hasilnya akan tampil di sini.</p>
-      <ul id="daftar-hasil">
-        <!-- Daftar makanan/minuman akan dirender di sini oleh JavaScript -->
-      </ul>
     </section>
 
-    <!-- Penjelasan singkat cara kerja -->
+    <hr>
+
     <section id="cara-kerja">
       <h2>Cara Kerja</h2>
       <ol>
         <li>Masukkan budget yang kamu punya.</li>
         <li>Klik "Cari Makanan".</li>
-        <li>Daftar makanan & minuman di Jakarta yang harganya masuk budget akan ditampilkan.</li>
+        <li>Daftar makanan &amp; minuman di Jakarta yang harganya masuk budget akan ditampilkan.</li>
       </ol>
     </section>
   </main>
 
+  <hr>
+
   <footer>
-    <p>Budget Picker JKT — Tugas Akhir Pemrograman.</p>
-    <p>Dikerjakan bertahap: HTML, CSS, lalu JavaScript.</p>
+    <p>Budget Picker JKT \u2014 Tugas Akhir Pemrograman.</p>
   </footer>
 
 </body>
