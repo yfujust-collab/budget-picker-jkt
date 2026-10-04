@@ -1,4 +1,38 @@
-// data kuliner
+    // daftar lokasi
+    const LOCATIONS = [
+      {
+        label: "Wilayah Administratif",
+        options: ["Jakarta Pusat", "Jakarta Utara", "Jakarta Barat", "Jakarta Timur", "Jakarta Selatan", "Kepulauan Seribu"]
+      },
+      {
+        label: "Kawasan Populer",
+        options: ["Blok M", "Kota Tua", "Menteng", "Tebet", "Kelapa Gading", "Jatinegara", "Kemang", "Pasar Santa", "Tanah Abang", "Glodok"]
+      }
+    ];
+
+    function renderLocationOptions(selectId, allLabel) {
+      const select = document.getElementById(selectId);
+      const allOption = document.createElement("option");
+      allOption.value = "semua";
+      allOption.textContent = allLabel;
+      select.appendChild(allOption);
+
+      LOCATIONS.forEach(function(group) {
+        const optgroup = document.createElement("optgroup");
+        optgroup.label = group.label;
+        group.options.forEach(function(location) {
+          const option = document.createElement("option");
+          option.textContent = location;
+          optgroup.appendChild(option);
+        });
+        select.appendChild(optgroup);
+      });
+    }
+
+    renderLocationOptions("lokasi-budget", "Semua Jakarta");
+    renderLocationOptions("filter-wilayah", "Semua wilayah");
+
+    // data kuliner
     const DAFTAR_KULINER = [
       { nama: "Siomay", harga: 10000, kategori: "makanan", foto: "src/img-01.jpg", area: ["Blok M", "Jakarta Selatan"], tempat: "gerobak sekitar Blok M dan terminal", deskripsi: "Olahan ikan kukus dengan tahu, kentang, kol, dan saus kacang." },
       { nama: "Batagor", harga: 10000, kategori: "makanan", foto: "src/img-02.jpg", area: ["Tebet", "Jakarta Selatan"], tempat: "jajanan sore di Tebet", deskripsi: "Tahu dan adonan ikan goreng renyah, disiram saus kacang dan kecap." },
@@ -32,7 +66,7 @@
       { nama: "Kopi Susu Gula Aren", harga: 18000, kategori: "minuman", foto: "src/img-30.jpg", area: ["Kemang", "Jakarta Selatan"], tempat: "kedai kopi kecil di Kemang", deskripsi: "Espresso, susu, dan gula aren dengan rasa manis-karamel." }
     ];
 
-// format harga
+    // format harga
     function formatRupiah(angka) {
       return "Rp " + angka.toLocaleString("id-ID");
     }
@@ -44,7 +78,7 @@
     }
 
     // buat kartu kuliner
-    function makeRow(item, index, showBadge) {
+    function makeRow(item, showBadge) {
       const li = document.createElement("li");
       li.className = "food-row";
 
@@ -92,8 +126,8 @@
     function renderList(targetId, items, showBadge) {
       const target = document.getElementById(targetId);
       target.innerHTML = "";
-      items.forEach(function(item, index) {
-        target.appendChild(makeRow(item, index, showBadge));
+      items.forEach(function(item) {
+        target.appendChild(makeRow(item, showBadge));
       });
     }
 
@@ -215,3 +249,4 @@
     }
     document.getElementById("filter-jenis").addEventListener("change", updateCategory);
     document.getElementById("filter-wilayah").addEventListener("change", updateCategory);
+
