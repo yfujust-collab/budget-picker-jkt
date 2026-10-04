@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Budget Picker JKT — cari makanan & minuman di Jakarta sesuai budget kamu.">
   <title>Budget Picker JKT — Cari Makan Sesuai Budget</title>
-  <!-- Tahap 1: struktur HTML saja. Styling (CSS) dan logika (JS) menyusul di tahap berikutnya. -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <header>
-    <h1>Budget Picker JKT</h1>
+    <h1>🍜 Budget Picker JKT</h1>
     <p>Dompet tipis bukan alasan buat nggak makan enak di Jakarta.</p>
   </header>
 
@@ -18,7 +18,7 @@
     <!-- Form input budget -->
     <section id="budget-form">
       <h2>Masukkan Budget Kamu</h2>
-      <form id="form-budget" action="#" method="get">
+      <form id="form-budget">
         <label for="input-budget">Budget (Rp)</label>
         <input
           type="number"
@@ -29,18 +29,23 @@
           step="1000"
           required
         >
+
+        <fieldset>
+          <legend>Kategori</legend>
+          <label><input type="radio" name="kategori" value="semua" checked> Semua</label>
+          <label><input type="radio" name="kategori" value="makanan"> Makanan</label>
+          <label><input type="radio" name="kategori" value="minuman"> Minuman</label>
+        </fieldset>
+
         <button type="submit">Cari Makanan</button>
       </form>
-      <!-- Tombol submit belum berfungsi — logika pencarian ditambahkan di tahap JavaScript. -->
     </section>
 
-    <!-- Hasil pencarian, diisi oleh JavaScript di tahap berikutnya -->
+    <!-- Hasil pencarian -->
     <section id="hasil">
       <h2>Hasil Pencarian</h2>
-      <p id="hasil-kosong">Masukkan budget di atas, hasilnya akan tampil di sini.</p>
-      <ul id="daftar-hasil">
-        <!-- Daftar makanan/minuman akan dirender di sini oleh JavaScript -->
-      </ul>
+      <p id="hasil-info">Masukkan budget di atas, hasilnya akan tampil di sini.</p>
+      <ul id="daftar-hasil"></ul>
     </section>
 
     <!-- Penjelasan singkat cara kerja -->
@@ -48,16 +53,19 @@
       <h2>Cara Kerja</h2>
       <ol>
         <li>Masukkan budget yang kamu punya.</li>
+        <li>Pilih kategori: semua, makanan, atau minuman.</li>
         <li>Klik "Cari Makanan".</li>
-        <li>Daftar makanan & minuman di Jakarta yang harganya masuk budget akan ditampilkan.</li>
+        <li>Daftar kuliner Jakarta yang harganya masuk budget akan ditampilkan, urut dari yang termurah.</li>
       </ol>
     </section>
   </main>
 
   <footer>
     <p>Budget Picker JKT — Tugas Akhir Pemrograman.</p>
-    <p>Dikerjakan bertahap: HTML, CSS, lalu JavaScript.</p>
+    <p>Harga bersifat perkiraan (kaki lima / warkop Jakarta).</p>
   </footer>
 
+  <script src="data.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
