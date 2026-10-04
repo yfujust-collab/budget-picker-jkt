@@ -8,8 +8,8 @@ mencari makanan & minuman di Jakarta sesuai budget yang dimiliki.
 | Tahap | Isi | Status |
 |-------|-----|--------|
 | 1 | Struktur HTML (`index.html`) | ✅ Selesai |
-| 2 | Styling CSS (`style.css`) | ⬜ Berikutnya |
-| 3 | Data makanan/minuman Jakarta (`data.js`) | ⬜ Menyusul |
+| 2 | Styling CSS (`style.css`) | ✅ Selesai |
+| 3 | Data makanan/minuman Jakarta (`data.js`) | ⬜ Berikutnya |
 | 4 | Logika filter budget (`script.js`) | ⬜ Menyusul |
 | 5 | Uji coba & perapihan akhir | ⬜ Menyusul |
 
