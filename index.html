@@ -19,8 +19,7 @@
           <li><a class="nav-link" href="#beranda" data-page="beranda">Beranda</a></li>
           <li><a class="nav-link" href="#jelajah" data-page="jelajah">Jelajah</a></li>
           <li><a class="nav-link" href="#detail" data-page="detail">Detail</a></li>
-          <li><a class="nav-link" href="#kategori" data-page="kategori">Kategori</a></li>
-          <li><a class="nav-link" href="#dukungan" data-page="dukungan">Dukungan</a></li>
+          <li><a class="nav-link" href="#favorit" data-page="favorit">Favorit</a></li>
           <li><a class="nav-link" href="#tentang" data-page="tentang">Tentang</a></li>
           <li><a class="nav-link" href="#kontak" data-page="kontak">Kontak</a></li>
         </ul>
@@ -84,6 +83,10 @@
           <button class="filter-button" type="button" data-filter="makanan">Makanan</button>
           <button class="filter-button" type="button" data-filter="minuman">Minuman</button>
         </div>
+        <div class="field">
+          <label for="jelajah-wilayah">Wilayah</label>
+          <select id="jelajah-wilayah"></select>
+        </div>
       </div>
       <p class="result-info" id="jelajah-info"></p>
       <ul class="food-list" id="jelajah-list"></ul>
@@ -99,47 +102,17 @@
       <div class="detail-list" id="detail-list"></div>
     </section>
 
-    <section class="page" id="kategori" aria-labelledby="kategori-title">
+    <section class="page" id="favorit" aria-labelledby="favorit-title">
       <div class="page-head">
         <div class="hero-copy">
-          <h2 class="page-title" id="kategori-title">Pilih jenis dan wilayah.</h2>
-          <p class="lede">Gunakan salah satu filter atau gabungkan keduanya untuk mempersempit pilihan.</p>
+          <h2 class="page-title" id="favorit-title">Favorit kamu.</h2>
+          <p class="lede">Simpan kuliner yang kamu suka, lalu lihat total harganya sekaligus sebelum berangkat.</p>
         </div>
       </div>
-      <div class="category-filter-panel">
-        <div class="field">
-          <label for="filter-jenis">Jenis</label>
-          <select id="filter-jenis"><option value="semua">Semua jenis</option><option value="makanan">Makanan</option><option value="minuman">Minuman</option></select>
-        </div>
-        <div class="field">
-          <label for="filter-wilayah">Wilayah / tempat</label>
-          <select id="filter-wilayah"></select>
-        </div>
-      </div>
-      <p class="result-info" id="kategori-info"></p>
-      <ul class="food-list" id="kategori-list"></ul>
-    </section>
-
-    <section class="page" id="dukungan" aria-labelledby="dukungan-title">
-      <div class="page-head">
-        <div class="hero-copy">
-          <h2 class="page-title" id="dukungan-title">Mau traktir kopi?</h2>
-          <p class="lede">Aplikasi ini gratis dan dibuat iseng-iseng. Kalau terbantu dan mau traktir kopi, link-nya ada di bawah. Nggak maksa, santai aja.</p>
-        </div>
-      </div>
-      <div class="story-grid">
-        <div class="story-copy">
-          <p>Bisa pilih yang paling gampang buat kamu:</p>
-          <div class="filter-group">
-            <a class="primary-button" href="https://saweria.co/senshine" target="_blank" rel="noopener noreferrer">Saweria</a>
-            <a class="secondary-button" href="https://trakteer.id/senhshine" target="_blank" rel="noopener noreferrer">Trakteer</a>
-          </div>
-        </div>
-        <aside class="side-note">
-          <h2>Santai aja</h2>
-          <p>Nggak harus kok. Dipakai aja kalau memang membantu.</p>
-        </aside>
-      </div>
+      <p class="result-info" id="favorit-info"></p>
+      <ul class="food-list" id="favorit-list"></ul>
+      <p class="favorit-total" id="favorit-total" hidden></p>
+      <p class="muted" id="favorit-empty">Belum ada favorit. Ketuk ikon hati pada kuliner untuk menyimpan.</p>
     </section>
 
     <section class="page" id="tentang" aria-labelledby="tentang-title">
@@ -169,6 +142,14 @@
         <div>
           <p class="muted">Kunjungi situs untuk melihat karya lain dan jalur kontak yang tersedia.</p>
           <a class="contact-link" href="https://senshiner.is-a.dev" target="_blank" rel="noopener noreferrer">senshiner.is-a.dev</a>
+        </div>
+        <div>
+          <p class="muted">Aplikasi ini gratis. Kalau terbantu dan ingin mendukung pengembangan:</p>
+          <p>
+            <a class="contact-link support-link" href="https://saweria.co/senshine" target="_blank" rel="noopener noreferrer">Saweria</a>
+            <span class="muted"> &middot; </span>
+            <a class="contact-link support-link" href="https://trakteer.id/senhshine" target="_blank" rel="noopener noreferrer">Trakteer</a>
+          </p>
         </div>
         <aside class="side-note">
           <h2>Catatan harga</h2>

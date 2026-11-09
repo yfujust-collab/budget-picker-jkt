@@ -30,7 +30,7 @@
     }
 
     renderLocationOptions("lokasi-budget", "Semua Jakarta");
-    renderLocationOptions("filter-wilayah", "Semua wilayah");
+    renderLocationOptions("jelajah-wilayah", "Semua wilayah");
 
     // data kuliner
     const DAFTAR_KULINER = [
@@ -117,9 +117,22 @@
       price.className = "price";
       price.textContent = formatRupiah(item.harga);
 
+      const actions = document.createElement("div");
+      actions.className = "row-actions";
+      const favBtn = document.createElement("button");
+      favBtn.type = "button";
+      favBtn.className = "fav-button";
+      favBtn.dataset.nama = item.nama;
+      favBtn.setAttribute("aria-label", "Simpan ke favorit: " + item.nama);
+      favBtn.addEventListener("click", function() {
+        toggleFavorit(item.nama);
+      });
+      actions.appendChild(price);
+      actions.appendChild(favBtn);
+
       li.appendChild(photo);
       li.appendChild(content);
-      li.appendChild(price);
+      li.appendChild(actions);
       return li;
     }
 
@@ -133,9 +146,7 @@
 
     const allSorted = sortedItems(DAFTAR_KULINER);
     renderList("jelajah-list", allSorted, true);
-    renderList("kategori-list", allSorted, true);
     document.getElementById("jelajah-info").textContent = allSorted.length + " hasil";
-    document.getElementById("kategori-info").textContent = allSorted.length + " hasil";
 
     function renderDetails() {
       const target = document.getElementById("detail-list");
@@ -151,10 +162,76 @@
         const body = document.createElement("div"); body.className = "detail-body";
         const desc = document.createElement("p"); desc.textContent = item.deskripsi;
         const where = document.createElement("p"); where.innerHTML = "<strong>Tempat:</strong> " + item.tempat + " (" + item.area.join(", ") + ").";
-        body.appendChild(desc); body.appendChild(where); details.appendChild(summary); details.appendChild(body); target.appendChild(details);
+        const mapLink = document.createElement("a");
+        mapLink.className = "map-link";
+        mapLink.href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(item.nama + " " + item.area.join(" "));
+        mapLink.target = "_blank";
+        mapLink.rel = "noopener noreferrer";
+        mapLink.textContent = "Lihat di peta";
+        body.appendChild(desc); body.appendChild(where); body.appendChild(mapLink); details.appendChild(summary); details.appendChild(body); target.appendChild(details);
       });
     }
     renderDetails();
+
+    // favorit (tersimpan di localStorage, tanpa backend)
+    const FAVORIT_KEY = "bpjk-favorit";
+    function getFavorit() {
+      try {
+        const raw = localStorage.getItem(FAVORIT_KEY);
+        const list = raw ? JSON.parse(raw) : [];
+        return Array.isArray(list) ? list : [];
+      } catch (e) {
+        return [];
+      }
+    }
+    function setFavorit(list) {
+      try {
+        localStorage.setItem(FAVORIT_KEY, JSON.stringify(list));
+      } catch (e) {}
+    }
+    function isFavorit(nama) {
+      return getFavorit().indexOf(nama) !== -1;
+    }
+    function refreshFavButtons() {
+      document.querySelectorAll(".fav-button").forEach(function(btn) {
+        const aktif = isFavorit(btn.dataset.nama);
+        btn.textContent = aktif ? "♥" : "♡";
+        btn.classList.toggle("active", aktif);
+        btn.setAttribute("aria-pressed", String(aktif));
+      });
+    }
+    function renderFavorit() {
+      const items = DAFTAR_KULINER.filter(function(item) {
+        return isFavorit(item.nama);
+      });
+      const target = document.getElementById("favorit-list");
+      target.innerHTML = "";
+      items.forEach(function(item) {
+        target.appendChild(makeRow(item, true));
+      });
+      document.getElementById("favorit-empty").hidden = items.length > 0;
+      document.getElementById("favorit-info").textContent = items.length + " favorit";
+      const totalEl = document.getElementById("favorit-total");
+      totalEl.hidden = items.length === 0;
+      if (items.length > 0) {
+        const total = items.reduce(function(sum, item) { return sum + item.harga; }, 0);
+        totalEl.textContent = "Total: " + formatRupiah(total);
+      }
+      refreshFavButtons();
+    }
+    function toggleFavorit(nama) {
+      const list = getFavorit();
+      const idx = list.indexOf(nama);
+      if (idx === -1) {
+        list.push(nama);
+      } else {
+        list.splice(idx, 1);
+      }
+      setFavorit(list);
+      refreshFavButtons();
+      refreshFavButtons();
+      renderFavorit();
+    }
 
     // pindah halaman
     function showPage(pageId) {
@@ -171,6 +248,9 @@
       });
       document.getElementById("main-nav").classList.remove("open");
       document.querySelector(".menu-toggle").setAttribute("aria-expanded", "false");
+      if (pageId === "favorit") {
+        renderFavorit();
+      }
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
@@ -219,15 +299,18 @@
     let activeFilter = "semua";
     function updateBrowse() {
       const query = document.getElementById("jelajah-search").value.trim().toLocaleLowerCase("id");
+      const wilayah = document.getElementById("jelajah-wilayah").value;
       const hasil = allSorted.filter(function(item) {
         const categoryMatch = activeFilter === "semua" || item.kategori === activeFilter;
-        return categoryMatch && item.nama.toLocaleLowerCase("id").includes(query);
+        const wilayahMatch = wilayah === "semua" || item.area.includes(wilayah);
+        return categoryMatch && wilayahMatch && item.nama.toLocaleLowerCase("id").includes(query);
       });
       renderList("jelajah-list", hasil, true);
       document.getElementById("jelajah-info").textContent = hasil.length + " hasil";
     }
 
     document.getElementById("jelajah-search").addEventListener("input", updateBrowse);
+    document.getElementById("jelajah-wilayah").addEventListener("change", updateBrowse);
     document.querySelectorAll(".filter-button").forEach(function(button) {
       button.addEventListener("click", function() {
         activeFilter = button.dataset.filter;
@@ -237,16 +320,4 @@
         updateBrowse();
       });
     });
-
-    function updateCategory() {
-      const jenis = document.getElementById("filter-jenis").value;
-      const wilayah = document.getElementById("filter-wilayah").value;
-      const hasil = allSorted.filter(function(item) {
-        return (jenis === "semua" || item.kategori === jenis) && (wilayah === "semua" || item.area.includes(wilayah));
-      });
-      renderList("kategori-list", hasil, true);
-      document.getElementById("kategori-info").textContent = hasil.length + " hasil";
-    }
-    document.getElementById("filter-jenis").addEventListener("change", updateCategory);
-    document.getElementById("filter-wilayah").addEventListener("change", updateCategory);
 
